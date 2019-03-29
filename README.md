@@ -22,16 +22,13 @@ Example: ```/home/user/Music/#ARTIST/#ALBUM/```<br>
 
 To change the appearance of the generated album artwork replace: “background.png”(Image) and/or “default.ttf”(Font) with an image/font of your choosing. Make sure the file names stay the same.
 
-# Dependencies 
+# Python Dependencies 
 
-python 
-pprint
-urllib
-json
-pillow
-eyed3
+- pprint
+- pillow
+- eyed3
 
-To install required python packages use ```pip install <package-name>```
+To install required python packages use ```$ pip install <package-name>```
 
 
 
