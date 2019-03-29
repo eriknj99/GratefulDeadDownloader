@@ -4,7 +4,8 @@ A python script for downloading Grateful Dead shows from archive.org.<br>
 The script will download all songs from a given show URL, fetch and embed song metadata, and generate and embed custom album artwork.
 
 # Usage
-```$ python gdDownload.py <Show URL> <Download Location>
+```
+$ python gdDownload.py <Show URL> <Download Location>
 ```
 ### Show URL
 The URL of any recording on archive.org<br>
