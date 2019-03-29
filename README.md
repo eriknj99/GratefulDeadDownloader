@@ -1,23 +1,21 @@
 # GratefulDeadDownloader (~);}
-A python script for downloading Grateful Dead shows from archive.org. 
+A python script for downloading Grateful Dead shows from archive.org.<br>
 
 The script will download all songs from a given show URL, fetch and embed song metadata, and generate and embed custom album artwork.
 
 # Usage
-```
-$ python gdDownload.py <Show URL> <Download Location>
-
+```$ python gdDownload.py <Show URL> <Download Location>
 ```
 ### Show URL
-The URL of any recording on archive.org
+The URL of any recording on archive.org<br>
 Example: https://archive.org/details/gd1977-05-08.mtx.dan.35086.flac24
 
 ### Download Location
-The Location on your computer where the songs will be downloaded.
-```#ALBUM```- will be replaced with the show name.
-```#ARTIST```- will be replaced with the artist name.
-Example: ```/home/user/Music/#ARTIST/#ALBUM/```
-(Directories will be created if they don’t already exist)
+The Location on your computer where the songs will be downloaded.<br>
+```#ALBUM```- will be replaced with the show name.<br>
+```#ARTIST```- will be replaced with the artist name.<br>
+Example: ```/home/user/Music/#ARTIST/#ALBUM/```<br>
+(Directories will be created if they don’t already exist)<br>
 
 # Artwork Customization
 
