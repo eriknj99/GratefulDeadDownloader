@@ -133,13 +133,13 @@ def downloadShow(origURL,filePath):
                     writeTextOnImage(filePath + "cover.png","default.ttf", "500", "center", "2000", "white", date, filePath + "cover.png")
 
                 try:
-                   wget.download(downloadURL, filePath +  title.replace('->', '').replace('>', '') + '.mp3' )  
+                   wget.download(downloadURL, filePath +  title.replace("->", "").replace(">","") + '.mp3' )  
 
                 except:
                     print("ERROR (1) A DOWNLOAD ERROR HAS OCCURED!")
 
                 try:
-                    audiofile = eyed3.load(filePath + title + ".mp3")
+                    audiofile = eyed3.load(filePath + title.replace("->", "").replace(">","") + ".mp3")
                     audiofile.tag.artist = artist
                     audiofile.tag.album = album
                     audiofile.tag.album_artist = artist
