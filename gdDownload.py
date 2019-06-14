@@ -3,8 +3,13 @@ import urllib.request, json
 from pprint import pprint
 from PIL import Image, ImageDraw, ImageFont
 import os
+import platform 
 import sys
 import eyed3
+import wget
+
+
+fileSep = '/'
 
 def writeTextOnImage(startImage, fontFile, fontSize, locX, locY, color, message,outputImage):
     image = Image.open(startImage)
@@ -50,7 +55,7 @@ def setAlbumArt(scanDir,key):
 
     print("Searching for album art...")
     for f in dirArray:
-        tmp = f[f.rfind('/') + 1:]
+        tmp = f[f.rfind(fileSep) + 1:]
 
         if tmp in keyArray:
             foundArt.append(f)
@@ -60,7 +65,7 @@ def setAlbumArt(scanDir,key):
 
     for f in dirArray:
         for tmpArt in foundArt:
-            if (tmpArt[:tmpArt.rfind('/')] == f[:f.rfind('/')]) and (f not in foundArt):
+            if (tmpArt[:tmpArt.rfind(fileSep)] == f[:f.rfind(fileSep)]) and (f not in foundArt):
                 if ".mp3" in f:
                     print("Embeding " + f)
                     audiofile = eyed3.load(f)
@@ -110,6 +115,9 @@ def downloadShow(origURL,filePath):
 
                 title = title.replace("/", "")
 
+                title = title.replace('->', '→')
+                title = title.replace('>', '→')
+
                 print(fileName)
                 print("\tTitle: "+title)
                 print("\tTrack: "+track)
@@ -127,9 +135,10 @@ def downloadShow(origURL,filePath):
                     writeTextOnImage("background.png","default.ttf", "500", "center", "50", "white", artist, filePath + "cover.png")
                     writeTextOnImage(filePath + "cover.png","default.ttf", "500", "center", "2000", "white", date, filePath + "cover.png")
 
-
                 try:
-                    downloadFile = urllib.request.urlretrieve(downloadURL,  filePath +  title + ".mp3")
+                   # downloadFile = urllib.request.urlretrieve(downloadURL,  filePath +  title + ".mp3")
+                   wget.download(downloadURL, filePath +  title + '.mp3' )  
+
                 except:
                     print("ERROR (1) A DOWNLOAD ERROR HAS OCCURED!")
 
@@ -148,5 +157,8 @@ def downloadShow(origURL,filePath):
         setAlbumArt(filePath, "cover.png")
 
 
-
+if(platform.system() == 'Windows'):
+	print('Windows Detected! Setting file separator to \\')
+	fileSep = '\\'
+	
 downloadShow(sys.argv[1],sys.argv[2])
