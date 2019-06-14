@@ -115,9 +115,6 @@ def downloadShow(origURL,filePath):
 
                 title = title.replace("/", "")
 
-                title = title.replace('->', '→')
-                title = title.replace('>', '→')
-
                 print(fileName)
                 print("\tTitle: "+title)
                 print("\tTrack: "+track)
@@ -136,8 +133,7 @@ def downloadShow(origURL,filePath):
                     writeTextOnImage(filePath + "cover.png","default.ttf", "500", "center", "2000", "white", date, filePath + "cover.png")
 
                 try:
-                   # downloadFile = urllib.request.urlretrieve(downloadURL,  filePath +  title + ".mp3")
-                   wget.download(downloadURL, filePath +  title + '.mp3' )  
+                   wget.download(downloadURL, filePath +  title.replace('->', '').replace('>', '') + '.mp3' )  
 
                 except:
                     print("ERROR (1) A DOWNLOAD ERROR HAS OCCURED!")
