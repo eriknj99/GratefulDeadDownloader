@@ -24,11 +24,16 @@ To change the appearance of the generated album artwork replace: “background.p
 
 # Python Dependencies 
 
-- pprint
+- wget
 - pillow
 - eyed3
 
 To install required python packages use ```$ pip install <package-name>```
+
+# Windows Users
+
+If you are getting libmagic bugs run the command: ``` pip install python-magic-bin==0.4.14 ```
+
 
 
 
