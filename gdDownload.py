@@ -10,6 +10,7 @@ import wget
 
 
 fileSep = '/'
+keepTrackNum = False
 
 def writeTextOnImage(startImage, fontFile, fontSize, locX, locY, color, message,outputImage):
     image = Image.open(startImage)
@@ -67,7 +68,7 @@ def setAlbumArt(scanDir,key):
         for tmpArt in foundArt:
             if (tmpArt[:tmpArt.rfind(fileSep)] == f[:f.rfind(fileSep)]) and (f not in foundArt):
                 if ".mp3" in f:
-                    print("Embeding " + f)
+                    print("Writing Image: \'" + tmpArt + "\' to \'"+ f + "\'")
                     audiofile = eyed3.load(f)
                     if (audiofile.tag == None):
                         audiofile.initTag()
@@ -110,8 +111,14 @@ def downloadShow(origURL,filePath):
                 album = jsonFiles[fileName]["album"]
                 artist = jsonFiles[fileName]["creator"]
 
+                
                 filePath = filePath.replace("#ARTIST", artist)
                 filePath = filePath.replace("#ALBUM", album)
+
+                saveFileName = filePath + title.replace('->', '').replace('>', '') + '.mp3'
+
+                if(keepTrackNum):
+                    saveFileName = filePath + track + '. ' + title.replace('->', '').replace('>', '') + '.mp3'
 
                 title = title.replace("/", "")
 
@@ -123,6 +130,7 @@ def downloadShow(origURL,filePath):
                 print("\tTrack: "+track)
                 print("\tAlbum: "+album)
                 print("\tArtist: "+artist)
+                print("\tFile: " + saveFileName)
 
                 downloadURL = origURL + fileName
 
@@ -137,13 +145,13 @@ def downloadShow(origURL,filePath):
 
                 try:
                    # downloadFile = urllib.request.urlretrieve(downloadURL,  filePath +  title + ".mp3")
-                   wget.download(downloadURL, filePath +  title + '.mp3' )  
+                   wget.download(downloadURL, saveFileName)  
 
                 except:
                     print("ERROR (1) A DOWNLOAD ERROR HAS OCCURED!")
 
                 try:
-                    audiofile = eyed3.load(filePath + title + ".mp3")
+                    audiofile = eyed3.load(saveFileName)
                     audiofile.tag.artist = artist
                     audiofile.tag.album = album
                     audiofile.tag.album_artist = artist
@@ -161,4 +169,9 @@ if(platform.system() == 'Windows'):
 	print('Windows Detected! Setting file separator to \\')
 	fileSep = '\\'
 	
+if(len(sys.argv) > 3 and sys.argv[3] == '-addTrackNum'):
+    keepTrackNum = True
+    print('All file names will now contain track numbers.')
+
+
 downloadShow(sys.argv[1],sys.argv[2])
