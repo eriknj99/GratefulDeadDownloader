@@ -122,9 +122,6 @@ def downloadShow(origURL,filePath):
 
                 title = title.replace("/", "")
 
-                title = title.replace('->', '→')
-                title = title.replace('>', '→')
-
                 print(fileName)
                 print("\tTitle: "+title)
                 print("\tTrack: "+track)
