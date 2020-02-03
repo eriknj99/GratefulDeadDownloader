@@ -32,7 +32,7 @@ To install required python packages use ```$ pip install <package-name>```
 
 # Windows Users
 
-If you are getting libmagic bugs run the command: ``` pip install python-magic-bin==0.4.14 ```
+If you are getting libmagic errors run the command: ``` pip install python-magic-bin==0.4.14 ```
 
 
 
